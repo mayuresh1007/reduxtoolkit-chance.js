@@ -11,8 +11,11 @@ const adminSlice = createSlice({
         removeAdmin(state,action){
             state.splice(action.payload,1)
         },
+        deleteAll(state,action){
+            return[];
+        }
     }
 })
 
-export const{addAdmin,removeAdmin} = adminSlice.actions;
+export const{addAdmin,removeAdmin,deleteAll} = adminSlice.actions;
 export default adminSlice.reducer;

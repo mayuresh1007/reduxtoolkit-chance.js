@@ -1,7 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { fakeUserData } from "../api/chanceApi";
-import { addAdmin, removeAdmin } from "../store/Admin/adminSlice";
-import { deleteAllUser } from "../store/users/userSlice";
+import { addAdmin, removeAdmin,deleteAll } from "../store/Admin/adminSlice";
 const AdminDashboard = () => {
   const dispatch = useDispatch();
   const Alladmins = useSelector((state) => state.admin);
@@ -16,7 +15,7 @@ const AdminDashboard = () => {
     console.log("admin name -->", id);
   };
   const deleteAllAdmin=()=>{
-    dispatch(deleteAllUser())
+    dispatch(deleteAll())
   }
 
   return (
@@ -26,7 +25,7 @@ const AdminDashboard = () => {
         onClick={() => {
           AddAdmin(fakeUserData());
         }}
-        className="btn btn-dark"
+        className="btn btn-dark m-1"
       >
         Add Admin
       </button>
@@ -38,24 +37,36 @@ const AdminDashboard = () => {
       >
        DeleteAll Admin
       </button>
-      {Alladmins.map((admin, id) => {
-        return (
-          <div key={id}>
-            <ul>
-              {/* <li>{admin.name}</li> */}
-              <li>{admin}</li>
-              <button
-                onClick={() => {
-                  removeadmin(admin.id);
-                }}
-                className="btn btn-dark"
-              >
-                Remove
-              </button>
-            </ul>
-          </div>
-        );
-      })}
+      
+      <table className="table table-dark table-stripe">
+        <thead>
+          <tr>
+            <th scope="col">Sr.No</th>
+            <th scope="col">AdminName</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Alladmins?.map((admin, index) => {
+            return (
+              <tr key={index}>
+                <th scope="row">{index + 1}</th>
+                <td>{admin}</td>
+                <td>
+                  <button
+                    onClick={() => {
+                        removeadmin(admin);
+                    }}
+                    className="btn btn-secondary"
+                  >
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </table>
     </>
   );
 };
