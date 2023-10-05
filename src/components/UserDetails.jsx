@@ -59,6 +59,7 @@ const UserDetails = () => {
                     onClick={() => {
                       deleteUser(user);
                     }}
+                    className="btn btn-secondary"
                   >
                     Delete
                   </button>
